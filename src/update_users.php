@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: signin.html");
+    exit;
+}
+
 include '../settings/connection.php';
 
 $id = $_POST['id'];

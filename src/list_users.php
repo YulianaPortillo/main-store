@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: signin.html");
+    exit;
+}
+
 include '../settings/connection.php';
 
 $sql = 'SELECT id, firstname, lastname, email, mobile_phone, photo_url
@@ -13,6 +20,10 @@ $result = pg_query($conn, $sql);
 </head>
 <body>
     <h1>Lista de usuarios</h1>
+    <p>
+        Bienvenido, <?php echo $_SESSION['firstname']; ?>
+        | <a href="logout.php">Cerrar sesión</a>
+    </p>
 
     <table border="1" cellpadding="8">
         <tr>

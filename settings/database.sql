@@ -1,0 +1,38 @@
+ALTER TABLE users
+ADD COLUMN IF NOT EXISTS ident_number VARCHAR(20);
+
+CREATE TABLE IF NOT EXISTS accounts (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id INTEGER NOT NULL UNIQUE,
+    email VARCHAR(254) NOT NULL UNIQUE,
+    password_hash VARCHAR(255),
+    status BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT accounts_user_fk
+        FOREIGN KEY (user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+);
+
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = 'users'
+          AND column_name = 'password'
+    ) THEN
+        INSERT INTO accounts (user_id, email, password_hash)
+        SELECT id, email, password
+        FROM users
+        WHERE password IS NOT NULL
+          AND NOT EXISTS (
+              SELECT 1
+              FROM accounts
+              WHERE accounts.user_id = users.id
+          );
+    END IF;
+END $$;
+
+ALTER TABLE users DROP COLUMN IF EXISTS password;
