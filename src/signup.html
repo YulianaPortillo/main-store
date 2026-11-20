@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Crear cuenta</title>
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <h1>Crear cuenta</h1>
+    <main class="page">
+        <section class="card card-wide">
+            <h1>Crear cuenta</h1>
 
-    <form action="signup.php" method="post">
-        <label>Nombre:</label><br>
-        <input type="text" name="firstname" required><br><br>
+            <form action="signup.php" method="post">
+                <label for="firstname">Nombre:</label>
+                <input id="firstname" type="text" name="firstname" required>
 
-        <label>Apellido:</label><br>
-        <input type="text" name="lastname" required><br><br>
+                <label for="lastname">Apellido:</label>
+                <input id="lastname" type="text" name="lastname" required>
 
-        <label>Identificación:</label><br>
-        <input type="text" name="ident_number"><br><br>
+                <label for="ident_number">Identificación:</label>
+                <input id="ident_number" type="text" name="ident_number">
 
-        <label>Celular:</label><br>
-        <input type="text" name="mobile_phone"><br><br>
+                <label for="mobile_phone">Celular:</label>
+                <input id="mobile_phone" type="text" name="mobile_phone">
 
-        <label>Correo:</label><br>
-        <input type="email" name="email" required><br><br>
+                <label for="email">Correo:</label>
+                <input id="email" type="email" name="email" required>
 
-        <label>Contraseña:</label><br>
-        <input type="password" name="password" required><br><br>
+                <label for="password">Contraseña:</label>
+                <input id="password" type="password" name="password" required>
 
-        <button type="submit">Registrarme</button>
-    </form>
+                <button type="submit">Registrarme</button>
+            </form>
 
-    <p><a href="signin.html">Ya tengo cuenta</a></p>
+            <p class="actions"><a href="signin.html">Ya tengo cuenta</a></p>
+        </section>
+    </main>
 </body>
 </html>

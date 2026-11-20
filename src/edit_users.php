@@ -18,11 +18,14 @@ $user = pg_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <title>Editar usuario</title>
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <h1>Editar usuario</h1>
+    <main class="page">
+        <section class="card card-wide">
+            <h1>Editar usuario</h1>
 
-    <form action="update_users.php" method="post" enctype="multipart/form-data">
+            <form action="update_users.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
 
         <label for="firstname">Nombre</label><br>
@@ -39,14 +42,16 @@ $user = pg_fetch_assoc($result);
 
         <?php if ($user['photo_url'] != "") { ?>
             <p>Foto actual:</p>
-            <img src="<?php echo $user['photo_url']; ?>" width="120"><br><br>
+            <img class="photo" src="<?php echo $user['photo_url']; ?>" alt="Foto actual"><br><br>
         <?php } ?>
 
         <label for="photo">Foto (JPG o PNG)</label><br>
         <input id="photo" type="file" name="photo" accept=".jpg,.jpeg,.png"><br><br>
 
-        <button type="submit">Guardar</button>
-        <a href="list_users.php">Cancelar</a>
-    </form>
+                <button type="submit">Guardar</button>
+                <a class="button" href="list_users.php">Cancelar</a>
+            </form>
+        </section>
+    </main>
 </body>
 </html>

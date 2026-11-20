@@ -17,15 +17,18 @@ $result = pg_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <title>Usuarios</title>
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <h1>Lista de usuarios</h1>
-    <p>
-        Bienvenido, <?php echo $_SESSION['firstname']; ?>
-        | <a href="logout.php">Cerrar sesión</a>
-    </p>
+    <main class="page">
+        <h1>Lista de usuarios</h1>
+        <p class="welcome">
+            Bienvenido, <?php echo $_SESSION['firstname']; ?>
+            | <a href="logout.php">Cerrar sesión</a>
+        </p>
 
-    <table border="1" cellpadding="8">
+        <div class="table-wrap">
+            <table>
         <tr>
             <th>Foto</th>
             <th>Nombre</th>
@@ -39,7 +42,7 @@ $result = pg_query($conn, $sql);
         <tr>
             <td>
                 <?php if ($row['photo_url'] != "") { ?>
-                    <img src="<?php echo $row['photo_url']; ?>" width="60" height="60">
+                    <img class="photo" src="<?php echo $row['photo_url']; ?>" alt="Foto de usuario">
                 <?php } else { ?>
                     Sin foto
                 <?php } ?>
@@ -53,6 +56,8 @@ $result = pg_query($conn, $sql);
             </td>
         </tr>
         <?php } ?>
-    </table>
+            </table>
+        </div>
+    </main>
 </body>
 </html>
